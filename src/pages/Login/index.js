@@ -12,7 +12,7 @@ export default function Login() {
 
     useEffect(() => {
         if (auth && auth.token) {
-          navigate("/home");
+          navigate("/");
         }
       }, []);
 
