@@ -28,7 +28,7 @@ export default function Feed(){
     
     return(
         <>
-        <Sidebar user={auth.user} />
+        <Sidebar/>
         <Container>
             {posts.map (p => (
                 <Post key={p.post.id}>

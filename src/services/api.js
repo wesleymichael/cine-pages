@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_API_URL;
 
 function createConfig(token) {
     return { headers: { Authorization: `Bearer ${token}` } };
-  }
+}
 
 function signup(body){
     const promise = axios.post(`${BASE_URL}/signup`, body);
@@ -16,6 +16,12 @@ function signin(body){
     return promise;   
 }
 
+function logout(token){
+    const config = createConfig(token);
+    const promise = axios.post(`${BASE_URL}/logout`, null, config);
+    return promise;
+}
+
 function getPosts(token){
     const config = createConfig(token);
     const promise = axios.get(`${BASE_URL}/posts`, config);
@@ -25,6 +31,7 @@ function getPosts(token){
 const api = {
     signup,
     signin,
+    logout,
     getPosts,
 }
 

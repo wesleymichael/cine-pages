@@ -2,10 +2,24 @@ import styled from "styled-components"
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai"
 import { MdOutlineLogout } from "react-icons/md"
 import { BsPlusCircle } from "react-icons/bs"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import api from "../../services/api"
+import useAuth from "../../hooks/useAuth"
 
 export default function Sidebar({user}) {
-
+    const navigate = useNavigate();
+    const {auth, logout} = useAuth();
+    
+    function handleLogout(){
+        const promise = api.logout(auth.token);
+        promise.then(() => {
+            logout();
+            navigate("/signin");
+        });
+        promise.catch(() => {
+            alert('Erro ao fazer logout, tente novamente');
+        });
+    }
     return (
         <Container>
             <h1>CinePáginas</h1>
@@ -29,14 +43,13 @@ export default function Sidebar({user}) {
             </div>
 
             <div>
-                <Link to={`/${user.username}`}>
-                    <img src={user.img} alt="user.username" />
+                <Link to={`/${auth.user.username}`}>
+                    <img src={auth.user.img} alt={auth.user.username} />
                     <p>Perfil</p>
                 </Link>
             </div>
 
-
-            <div>
+            <div onClick={handleLogout}>
                 <Link>
                     <MdOutlineLogout />
                     <p>Sair</p>
