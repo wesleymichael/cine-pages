@@ -2,10 +2,21 @@ import { useEffect, useState } from "react"
 import useAuth from "../../hooks/useAuth"
 import api from "../../services/api";
 import styled from "styled-components";
+import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function Feed(){
     const [posts, setPosts] = useState([]);
+    const navigate = useNavigate();
     const {auth} = useAuth();
+
+    useEffect(() => {
+        if (!auth.token) {
+          navigate("/signin");
+        } else {
+            loadPosts();
+        }
+    }, []);
     
     function loadPosts(){
         const promise = api.getPosts(auth.token);
@@ -14,10 +25,10 @@ export default function Feed(){
             setPosts(res.data);
         });
     }
-
-    useEffect(loadPosts, []);
     
     return(
+        <>
+        <Sidebar user={auth.user} />
         <Container>
             {posts.map (p => (
                 <Post key={p.post.id}>
@@ -35,6 +46,7 @@ export default function Feed(){
                 </Post>
             ) )}
         </Container>
+        </>
     )
 }
 

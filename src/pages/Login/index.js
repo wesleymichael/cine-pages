@@ -28,7 +28,7 @@ export default function Login() {
         promise.then((res) => {
             setIsLoading(false);
             login(res.data);
-            navigate("/home");
+            navigate("/");
         });
         promise.catch(() => {
             setIsLoading(false);
