@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLOR_BORDER } from "../../constants/colors";
 
 export const Container = styled.div`
     display: flex;
@@ -6,7 +7,7 @@ export const Container = styled.div`
     height: 100vh;
     width: 18vw;
     position: fixed;
-    border-right: 1px solid grey;
+    border-right: 1px solid ${COLOR_BORDER};
     div{
         font-size: 20px;
         margin: 10px 15px;
@@ -32,15 +33,14 @@ export const Container = styled.div`
     div:last-child{
         position: absolute;
         bottom: 10px;
-
     }
     h1{
-        font-size: 30px;
+        font-size: 35px;
         line-height: 40px;
         text-align: center;
         margin: 15px 0;
         padding-bottom: 15px;
-        border-bottom: 1px solid grey;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        //border-bottom: 1px solid ${COLOR_BORDER};
     }
-
 `

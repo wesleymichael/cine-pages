@@ -5,6 +5,7 @@ import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import PostRender from "./PostRender";
+import { COLOR_BORDER } from "../../constants/colors";
 
 export default function Profile() {
     const { username } = useParams();
@@ -84,7 +85,7 @@ const ProfileContainer = styled.div`
     display: flex;
     margin: 40px auto;
     padding-bottom: 20px;
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid ${COLOR_BORDER};
     img{
         width: 90px;
         height: 90px;

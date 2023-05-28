@@ -1,0 +1,1 @@
+export const COLOR_BORDER = "rgba(184, 184, 184, 0.811)";
