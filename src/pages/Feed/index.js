@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useAuth from "../../hooks/useAuth"
-import api from "../../services/api";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import NewPost from "./NewPost";
+import usePost from "../../hooks/usePost";
 
 export default function Feed(){
-    const [posts, setPosts] = useState([]);
-    const [activeAddPost, setActiveAddPost] = useState(false)
     const navigate = useNavigate();
     const {auth} = useAuth();
+    const {posts, loadPosts} = usePost();
 
     useEffect(() => {
         if (!auth.token) {
@@ -19,21 +17,10 @@ export default function Feed(){
             loadPosts();
         }
     }, []);
-    
-    function loadPosts(){
-        const promise = api.getPosts(auth.token);
-        
-        promise.then((res) => {
-            setPosts(res.data);
-        });
-    }
-    
+
     return(
         <>
-        {activeAddPost && 
-            <NewPost setActiveAddPost={setActiveAddPost} loadPosts={loadPosts}/>
-        }
-        <Sidebar setActiveAddPost={setActiveAddPost} />
+        <Sidebar/>
         <Container>
             {posts.map (p => (
                 <Post key={p.post.id}>

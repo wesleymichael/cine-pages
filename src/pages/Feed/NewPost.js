@@ -4,11 +4,13 @@ import { Input } from "../../components/styled";
 import { useState } from "react";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
+import usePost from "../../hooks/usePost";
 
-export default function NewPost({ setActiveAddPost, loadPosts }) {
+export default function NewPost() {
     const [form, setForm] = useState({ "description": "", "img": "" });
-    const { auth } = useAuth()
     const [isLoading, setIsLoading] = useState(false);
+    const {setActiveAddPost, loadPosts} = usePost();
+    const { auth } = useAuth();
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });

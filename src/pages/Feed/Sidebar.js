@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom"
 import api from "../../services/api"
 import useAuth from "../../hooks/useAuth"
 import { Container } from "./styled"
+import NewPost from "./NewPost";
+import usePost from "../../hooks/usePost"
 
-export default function Sidebar({setActiveAddPost}) {
+export default function Sidebar() {
     const navigate = useNavigate();
     const {auth, logout} = useAuth();
+    const {activeAddPost, setActiveAddPost} = usePost();
     
     function handleLogout(){
         const promise = api.logout(auth.token);
@@ -21,6 +24,10 @@ export default function Sidebar({setActiveAddPost}) {
         });
     }
     return (
+        <>
+        {activeAddPost && 
+            <NewPost />
+        }
         <Container>
             <h1>CinePáginas</h1>
             <div>
@@ -56,6 +63,7 @@ export default function Sidebar({setActiveAddPost}) {
                 </Link>
             </div>
         </Container>
+        </>
     )
 }
 
