@@ -52,6 +52,18 @@ function dislikePost(token, postId){
     return promise;
 }
 
+function follow(token, body){
+    const config = createConfig(token);
+    const promise = axios.post(`${BASE_URL}/follow`, body, config);
+    return promise;
+}
+
+function unfollow(token, body){
+    const config = createConfig(token);
+    const promise = axios.delete(`${BASE_URL}/unfollow`, { ...config, data: body });
+    return promise;
+}
+
 const api = {
     signup,
     signin,
@@ -61,6 +73,8 @@ const api = {
     getPostsByUsername,
     likePost,
     dislikePost,
+    follow,
+    unfollow,
 }
 
 export default api;

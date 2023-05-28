@@ -10,15 +10,31 @@ import { COLOR_BORDER } from "../../constants/colors";
 export default function Profile() {
     const { username } = useParams();
     const [usernameData, setUsernameData] = useState([]);
+    const [following, setFollowing] = useState(usernameData.isFollowing);
     const { auth } = useAuth();
 
     function loadPostsUsername() {
         const promise = api.getPostsByUsername(auth.token, username);
-        
         promise.then((res) => {
             setUsernameData(res.data[0]);
+            setFollowing(res.data[0].isFollowing);
         })
     }
+
+    const handleFollow = async () => {
+        try {
+            const body = {username}
+            if (following) {
+                await api.unfollow(auth.token, body);
+            } else {
+                await api.follow(auth.token, body);
+            }
+            setFollowing(!following);
+            loadPostsUsername();
+        } catch (error) {
+            console.error("Erro ao seguir usuário:", error.response.data);
+        }
+    };
 
     useEffect(loadPostsUsername, []);
 
@@ -32,7 +48,16 @@ export default function Profile() {
                             <img src={usernameData.imgUser} alt={usernameData.imgUser} />
                         </div>
                         <Info>
-                            <span>{username}</span>
+                            <div>
+                                <span>{username}</span>
+                                {auth.user.username !== username && (
+                                    following ? (
+                                        <ButtonFollow onClick={handleFollow}>Seguindo</ButtonFollow>
+                                    ) : (
+                                        <ButtonFollow onClick={handleFollow}>Seguir</ButtonFollow>
+                                    )
+                                )}
+                            </div>
                             <div>
                                 <p>{usernameData.postsUsername?.length} publicações</p>
                                 <p>{usernameData.followers} seguidores</p>
@@ -42,9 +67,9 @@ export default function Profile() {
                     </ProfileContainer>
                 </div>
                 <ContainerPost>
-                    {usernameData.postsUsername && 
+                    {usernameData.postsUsername &&
                         usernameData.postsUsername.map(post => (
-                            <PostRender post={post} loadPostsUsername={loadPostsUsername} key={post.id}  />
+                            <PostRender post={post} loadPostsUsername={loadPostsUsername} key={post.id} />
                         ))
                     }
                 </ContainerPost>
@@ -52,6 +77,27 @@ export default function Profile() {
         </>
     )
 }
+
+const ButtonFollow = styled.button`
+    padding: 5px;
+    height: 30px;
+    width: 70px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    :hover {
+        background-color: #f0f0f0;
+    }
+    :focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(240, 240, 240, 0.5);
+    }
+
+`
 
 const ContainerPost = styled.div`
     display: flex;
@@ -72,12 +118,15 @@ const Info = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    span{
-        margin-bottom: 25px;
-    }
     div{
         display: flex;
         gap: 40px;
+    }
+    div:first-child{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
     }
 `
 
