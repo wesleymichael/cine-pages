@@ -1,4 +1,6 @@
+import React from "react";
 import styled from "styled-components";
+import { FaHeart } from "react-icons/fa";
 
 export default function PostRender({ post }) {
     return (
@@ -7,7 +9,10 @@ export default function PostRender({ post }) {
                 <Image src={post.img} alt={post.id} />
             </Main>
             <FooterPost>
-                <Likes>Likes: {post.likes}</Likes>
+                <Likes>
+                    <LikeIcon/>
+                    {post.likes}
+                </Likes>
                 <Description>{post.description}</Description>
             </FooterPost>
         </Post>
@@ -15,47 +20,56 @@ export default function PostRender({ post }) {
 }
 
 const Post = styled.div`
-    display: flex;
-    width: calc(50% - 10px);
-    height: 400px;
-    position: relative;
-    border: 1px solid grey;
-    margin-top: 40px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    overflow: hidden;
+  display: flex;
+  width: calc(50% - 10px);
+  height: 400px;
+  position: relative;
+  border: 1px solid grey;
+  margin-top: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 const FooterPost = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 25%;
-    position: absolute;
-    bottom: 0;
-    padding: 12px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 25%;
+  position: absolute;
+  bottom: 0;
+  padding: 12px;
+  background-color: #fff;
 `;
 
 const Main = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 75%;
+  position: absolute;
+  width: 100%;
+  height: 75%;
 `;
 
 const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const Likes = styled.p`
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+
+  svg {
+    margin-right: 8px;
+  }
+`;
+const LikeIcon = styled(FaHeart)`
+  color: red;
+  margin-right: 5px;
 `;
 
 const Description = styled.p`
-    font-size: 14px;
+  font-size: 14px;
 `;
