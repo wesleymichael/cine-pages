@@ -31,6 +31,22 @@ export const Input = styled.input`
     }
 `;
 
+export const TextArea = styled.textarea`
+    width: 300px;
+    height: 250px;
+    resize: none;
+    margin-bottom: 6px;
+    padding: 10px;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 25px;
+
+    &::placeholder{
+        color: #DBDBDB;
+    }
+`;
+
 export const Button = styled.button`
     width: 300px;
     height: 45px;

@@ -28,11 +28,18 @@ function getPosts(token){
     return promise;
 }
 
+function addPost(token, body){
+    const config = createConfig(token);
+    const promise = axios.get(`${BASE_URL}/new-post`, body, config);
+    return promise;
+}
+
 const api = {
     signup,
     signin,
     logout,
     getPosts,
+    addPost,
 }
 
 export default api;

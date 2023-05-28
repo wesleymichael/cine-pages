@@ -4,9 +4,11 @@ import api from "../../services/api";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
+import NewPost from "./NewPost";
 
 export default function Feed(){
     const [posts, setPosts] = useState([]);
+    const [activeAddPost, setActiveAddPost] = useState(false)
     const navigate = useNavigate();
     const {auth} = useAuth();
 
@@ -28,7 +30,10 @@ export default function Feed(){
     
     return(
         <>
-        <Sidebar/>
+        {activeAddPost && 
+            <NewPost setActiveAddPost={setActiveAddPost}/>
+        }
+        <Sidebar setActiveAddPost={setActiveAddPost} />
         <Container>
             {posts.map (p => (
                 <Post key={p.post.id}>
