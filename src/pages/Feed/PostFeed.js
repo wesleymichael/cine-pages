@@ -2,35 +2,29 @@ import styled from "styled-components";
 import useAuth from "../../hooks/useAuth";
 import api from "../../services/api";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PostFeed({ postData, loadPosts }) {
     const [liked, setLiked] = useState(postData.post.liked);
     const { auth } = useAuth();
 
-    const handleLike = () => {
-        if (liked) {
-            dislike();
-        } else {
-            like();
+    useEffect(() => {
+        setLiked(postData.post.liked);
+    }, [postData.post.liked]);
+
+    const handleLike = async () => {
+        try {
+            if (liked) {
+                await api.dislikePost(auth.token, postData.post.id);
+            } else {
+                await api.likePost(auth.token, postData.post.id);
+            }
+            setLiked(!liked);
+            loadPosts();
+        } catch (error) {
+            console.error("Erro ao curtir ou descurtir o post:", error);
         }
     };
-
-    function like() {
-        const promise = api.likePost(auth.token, postData.post.id);
-        promise.then(() => {
-            loadPosts();
-            setLiked(!liked);
-        });
-    }
-
-    function dislike() {
-        const promise = api.dislikePost(auth.token, postData.post.id);
-        promise.then(() => {
-            loadPosts();
-            setLiked(!liked);
-        });
-    }
 
     return (
         <Post key={postData.post.id}>
@@ -45,7 +39,7 @@ export default function PostFeed({ postData, loadPosts }) {
                 <img src={postData.post.img} alt={postData.post.id} />
             </Main>
             <FooterPost>
-            <LikeContainer onClick={handleLike} >
+                <LikeContainer onClick={handleLike} >
                     {liked ? <LikeIcon /> : <NoLikeIcon />}
                     Curtido por {postData.post.likes} pessoas
                 </LikeContainer>
