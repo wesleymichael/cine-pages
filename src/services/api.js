@@ -30,7 +30,7 @@ function getPosts(token){
 
 function addPost(token, body){
     const config = createConfig(token);
-    const promise = axios.get(`${BASE_URL}/new-post`, body, config);
+    const promise = axios.post(`${BASE_URL}/new-post`, body, config);
     return promise;
 }
 

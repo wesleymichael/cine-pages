@@ -2,13 +2,11 @@ import styled from "styled-components";
 import { Button, Form, TextArea } from "../../components/styled";
 import { Input } from "../../components/styled";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 
-export default function NewPost({ setActiveAddPost }) {
+export default function NewPost({ setActiveAddPost, loadPosts }) {
     const [form, setForm] = useState({ "description": "", "img": "" });
-    const navigate = useNavigate();
     const { auth } = useAuth()
     const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +21,8 @@ export default function NewPost({ setActiveAddPost }) {
         const promise = api.addPost(auth.token, { ...form });
         promise.then((res) => {
             setIsLoading(false);
-            navigate("/");
+            setActiveAddPost(false);
+            loadPosts();
         });
         promise.catch(() => {
             setIsLoading(false);
@@ -63,7 +62,6 @@ export default function NewPost({ setActiveAddPost }) {
                     </Button>
                 </Form>
             </FormContainer>
-
         </>
     )
 }

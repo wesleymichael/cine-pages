@@ -31,7 +31,7 @@ export default function Feed(){
     return(
         <>
         {activeAddPost && 
-            <NewPost setActiveAddPost={setActiveAddPost}/>
+            <NewPost setActiveAddPost={setActiveAddPost} loadPosts={loadPosts}/>
         }
         <Sidebar setActiveAddPost={setActiveAddPost} />
         <Container>
