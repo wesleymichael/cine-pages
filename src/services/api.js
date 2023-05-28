@@ -34,12 +34,19 @@ function addPost(token, body){
     return promise;
 }
 
+function getPostsByUsername(token, username){
+    const config = createConfig(token);
+    const promise = axios.get(`${BASE_URL}/posts/${username}`, config);
+    return promise;
+}
+
 const api = {
     signup,
     signin,
     logout,
     getPosts,
     addPost,
+    getPostsByUsername,
 }
 
 export default api;
