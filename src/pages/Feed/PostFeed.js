@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import api from "../../services/api";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function PostFeed({ postData, loadPosts }) {
     const [liked, setLiked] = useState(postData.post.liked);
@@ -29,9 +30,9 @@ export default function PostFeed({ postData, loadPosts }) {
     return (
         <Post key={postData.post.id}>
             <HeaderPost>
-                <ImgUser src={postData.userImg} alt={postData.username} />
+                <Link to={`/${postData.username}`}><ImgUser src={postData.userImg} alt={postData.username} /></Link>
                 <p>
-                    {postData.username} -{" "}
+                    <Link to={`/${postData.username}`}>{postData.username}</Link> - {" "}
                     {new Date(postData.post.createdAt).toLocaleString()}
                 </p>
             </HeaderPost>
@@ -57,6 +58,9 @@ const Post = styled.div`
     border: 1px solid #ddd;
     margin-top: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    a{
+        color: #000;
+    }
 `;
 
 const HeaderPost = styled.div`
