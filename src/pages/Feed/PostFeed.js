@@ -1,0 +1,129 @@
+import styled from "styled-components";
+import useAuth from "../../hooks/useAuth";
+import api from "../../services/api";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useState } from "react";
+
+export default function PostFeed({ postData, loadPosts }) {
+    const [liked, setLiked] = useState(postData.post.liked);
+    const { auth } = useAuth();
+
+    const handleLike = () => {
+        if (liked) {
+            dislike();
+        } else {
+            like();
+        }
+    };
+
+    function like() {
+        const promise = api.likePost(auth.token, postData.post.id);
+        promise.then(() => {
+            loadPosts();
+            setLiked(!liked);
+        });
+    }
+
+    function dislike() {
+        const promise = api.dislikePost(auth.token, postData.post.id);
+        promise.then(() => {
+            loadPosts();
+            setLiked(!liked);
+        });
+    }
+
+    return (
+        <Post key={postData.post.id}>
+            <HeaderPost>
+                <ImgUser src={postData.userImg} alt={postData.username} />
+                <p>
+                    {postData.username} -{" "}
+                    {new Date(postData.post.createdAt).toLocaleString()}
+                </p>
+            </HeaderPost>
+            <Main>
+                <img src={postData.post.img} alt={postData.post.id} />
+            </Main>
+            <FooterPost>
+            <LikeContainer onClick={handleLike} >
+                    {liked ? <LikeIcon /> : <NoLikeIcon />}
+                    Curtido por {postData.post.likes} pessoas
+                </LikeContainer>
+                <Description>{postData.post.description}</Description>
+            </FooterPost>
+        </Post>
+    )
+}
+
+const Post = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    margin-top: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
+
+const HeaderPost = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+`;
+
+const FooterPost = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #fff;
+`;
+
+const ImgUser = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+`;
+
+const Main = styled.div`
+    height: 0;
+    padding-bottom: 75%;
+    position: relative;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`;
+
+const LikeContainer = styled.button`
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    svg{
+        margin-right: 14px;
+        font-size: 16px;
+    }
+`;
+
+const LikeIcon = styled(AiFillHeart)`
+    color: red;
+`;
+
+const NoLikeIcon = styled(AiOutlineHeart)`
+    color: black;
+`;
+
+const Description = styled.p`
+    margin-bottom: 14px;
+`;

@@ -43,7 +43,7 @@ export default function Profile() {
                 <ContainerPost>
                     {usernameData.postsUsername && 
                         usernameData.postsUsername.map(post => (
-                            <PostRender post={post} key={post.id} />
+                            <PostRender post={post} loadPostsUsername={loadPostsUsername} key={post.id}  />
                         ))
                     }
                 </ContainerPost>
