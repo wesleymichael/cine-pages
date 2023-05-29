@@ -35,6 +35,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 800px;
-    margin: 0 auto;
+    justify-content: center;
+    margin-left: 18vw;
+    @media (max-width: 768px) {
+        margin-left: calc(80px);   
+    }
+    @media (max-width: 480px) {
+        margin-left: 0;
+    }
 `;

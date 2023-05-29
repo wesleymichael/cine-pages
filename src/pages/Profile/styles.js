@@ -25,7 +25,6 @@ export const ContainerFollow = styled.div`
         border-bottom: 1px solid ${COLOR_BORDER};
     }
 `
-
 export const BoxFollowers = styled.div`
     width: 90%;
     margin: 20px auto;
@@ -70,6 +69,15 @@ export const Post = styled.div`
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    @media (max-width: 768px) {
+        width: 95%;
+    }
+    @media (max-width: 480px) {
+        width: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
 `;
 
 export const FooterPost = styled.div`
@@ -145,7 +153,20 @@ export const ButtonFollow = styled.button`
 export const ContainerPost = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding-bottom: 70px;
+    @media (max-width: 1024px) {
+
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @media (max-width: 480px) {
+        
+    }
 
 `
 
@@ -155,6 +176,18 @@ export const Container = styled.div`
     position: absolute;
     right: 0;
     padding: 0 10vw;
+    @media (max-width: 1024px) {
+        padding: 0 20px;
+    }
+
+    @media (max-width: 768px) {
+        width: calc(100vw - 80px);
+    }
+
+    @media (max-width: 480px) {
+        width: 100vw;
+        padding: 0;
+    }
 `
 
 export const Info = styled.div`
@@ -174,11 +207,16 @@ export const Info = styled.div`
     span{
         cursor: pointer;
     }
+    @media (max-width: 768px) {
+        div{
+            gap: 20px;
+        }
+    }
 `
 
 export const ProfileContainer = styled.div`
     display: flex;
-    margin: 40px auto;
+    margin: 20px auto;
     padding-bottom: 20px;
     border-bottom: 1px solid ${COLOR_BORDER};
     img{
@@ -188,4 +226,22 @@ export const ProfileContainer = styled.div`
         object-fit: cover;
         margin: 0 70px;
     }
+    @media (max-width: 1024px) {
+
+    }
+
+    @media (max-width: 768px) {
+        img{
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            margin: 0 10px;
+        }
+        justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+
+    }
+
 `

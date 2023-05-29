@@ -53,6 +53,19 @@ const Container = styled.div`
     position: absolute;
     right: 0;
     padding: 0 10vw;
+    @media (max-width: 1024px) {
+
+    }
+
+    @media (max-width: 768px) {
+
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 0 0 70px 0;
+    }
+    
 `;
 
 const InputContainer = styled.div`
@@ -62,6 +75,18 @@ const InputContainer = styled.div`
     margin: 50px auto;
     border: 1px solid ${COLOR_BORDER};
     border-radius: 4px;
+    @media (max-width: 1024px) {
+
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
+    @media (max-width: 480px) {
+        border: none;
+        margin: 0;
+    }
 `;
 
 const Input = styled.input`
@@ -92,6 +117,25 @@ const Users = styled.div`
             border-radius: 70px;
             object-fit: cover;
             margin-right: 10px;
+        }
+    }
+    @media (max-width: 1024px) {
+
+    }
+
+    @media (max-width: 768px) {
+
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        div > img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
         }
     }
 `

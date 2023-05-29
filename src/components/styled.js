@@ -112,4 +112,37 @@ export const ContainerSideBar = styled.div`
         padding-bottom: 15px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     }
+    @media (max-width: 1024px) {
+        h1{
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        p{
+            display: none;
+        }
+        h1{
+            font-size: 14px;
+        }
+        width: 80px;
+        align-items: center;
+    }
+
+    @media (max-width: 480px) {
+        h1{
+            display: none;
+        }
+        width: 100vw;
+        height: 70px;
+        flex-direction: row;
+        bottom: 0;
+        z-index: 5;
+        background-color: white;
+        justify-content: space-around;
+        div:last-child{
+            position: static;
+        }
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    }
 `

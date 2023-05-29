@@ -11,8 +11,6 @@ import usePost from "../../hooks/usePost";
 
 export default function Profile() {
     const { username } = useParams();
-    //const [usernameData, setUsernameData] = useState([]);
-    //const [following, setFollowing] = useState(usernameData.isFollowing);
     const [showFollowers, setShowFollowers] = useState(false);
     const [showFollowing, setShowFollowing] = useState(false);
     const {usernameData, following, setFollowing, loadPostsUsername} = usePost();
