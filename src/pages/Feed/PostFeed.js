@@ -40,9 +40,11 @@ export default function PostFeed({ postData, loadPosts }) {
                 <img src={postData.post.img} alt={postData.post.id} />
             </Main>
             <FooterPost>
-                <LikeContainer onClick={handleLike} >
+                <LikeContainer onClick={handleLike}>
                     {liked ? <LikeIcon /> : <NoLikeIcon />}
-                    Curtido por {postData.post.likes} pessoas
+                    {postData.post.likes === 0 ? "Postagem ainda não curtida!" : (
+                        `Curtido por ${postData.post.likes} ${postData.post.likes === 1 ? "pessoa" : "pessoas"}`
+                    )}
                 </LikeContainer>
                 <Description>{postData.post.description}</Description>
             </FooterPost>

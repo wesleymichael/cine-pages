@@ -64,6 +64,18 @@ function unfollow(token, body){
     return promise;
 }
 
+function getFollowers(token, username){
+    const config = createConfig(token);
+    const promise = axios.get(`${BASE_URL}/followers/${username}`, config);
+    return promise;
+}
+
+function getFollowing(token, username){
+    const config = createConfig(token);
+    const promise = axios.get(`${BASE_URL}/following/${username}`, config);
+    return promise;
+}
+
 const api = {
     signup,
     signin,
@@ -75,6 +87,8 @@ const api = {
     dislikePost,
     follow,
     unfollow,
+    getFollowers,
+    getFollowing,
 }
 
 export default api;
