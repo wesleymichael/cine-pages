@@ -18,8 +18,7 @@ export default function App() {
               <Route path="/signin" element={<Login />} />
               <Route path="/" element={<Feed />} />
               <Route path="/:username" element={<Profile />} />
-              <Route path="/followers" element={<h1>Seguidores</h1>} />
-              <Route path="/following" element={<h1>Seguindo</h1>} />
+              <Route path="/search" element={<h1>Ainda não implementada</h1>} />
             </Routes>
           </BrowserRouter>
         </LikeProvider>

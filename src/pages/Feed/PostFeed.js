@@ -32,7 +32,7 @@ export default function PostFeed({ postData, loadPosts }) {
             <HeaderPost>
                 <Link to={`/${postData.username}`}><ImgUser src={postData.userImg} alt={postData.username} /></Link>
                 <p>
-                    <Link to={`/${postData.username}`}>{postData.username}</Link> - {" "}
+                    <Link to={`/${postData.username}`}><span>{postData.username}</span></Link> - {" "}
                     {new Date(postData.post.createdAt).toLocaleString()}
                 </p>
             </HeaderPost>
@@ -46,7 +46,7 @@ export default function PostFeed({ postData, loadPosts }) {
                         `Curtido por ${postData.post.likes} ${postData.post.likes === 1 ? "pessoa" : "pessoas"}`
                     )}
                 </LikeContainer>
-                <Description>{postData.post.description}</Description>
+                <Description><span>{postData.username}</span>{postData.post.description}</Description>
             </FooterPost>
         </Post>
     )
@@ -70,6 +70,9 @@ const HeaderPost = styled.div`
     align-items: center;
     padding: 10px;
     background-color: #f5f5f5;
+    span{
+        font-weight: bold;
+    }
 `;
 
 const FooterPost = styled.div`
@@ -126,4 +129,8 @@ const NoLikeIcon = styled(AiOutlineHeart)`
 
 const Description = styled.p`
     margin-bottom: 14px;
+    span{
+        padding-right: 7px;
+        font-weight: bold;
+    }
 `;
