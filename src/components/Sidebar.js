@@ -2,11 +2,11 @@ import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai"
 import { MdOutlineLogout } from "react-icons/md"
 import { BsPlusCircle } from "react-icons/bs"
 import { Link, useNavigate } from "react-router-dom"
-import api from "../../services/api"
-import useAuth from "../../hooks/useAuth"
-import { Container } from "./styled"
-import NewPost from "./NewPost";
-import usePost from "../../hooks/usePost"
+import api from "../services/api"
+import useAuth from "../hooks/useAuth"
+import NewPost from "../pages/Feed/NewPost";
+import usePost from "../hooks/usePost"
+import { ContainerSideBar } from "./styled"
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function Sidebar() {
         {activeAddPost && 
             <NewPost />
         }
-        <Container>
+        <ContainerSideBar>
             <h1>CinePáginas</h1>
             <div>
                 <Link to={"/"}>
@@ -62,7 +62,7 @@ export default function Sidebar() {
                     <p>Sair</p>
                 </Link>
             </div>
-        </Container>
+        </ContainerSideBar>
         </>
     )
 }

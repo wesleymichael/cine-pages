@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import styled from "styled-components";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import usePost from "../../hooks/usePost";
 import PostFeed from "./PostFeed";

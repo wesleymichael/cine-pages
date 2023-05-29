@@ -5,23 +5,21 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Feed from "./pages/Feed";
 import { PostProvider } from "./contexts/PostContext";
 import Profile from "./pages/Profile";
-import { LikeProvider } from "./contexts/LikeContext";
+import SearchUsers from "./pages/Users";
 
 export default function App() {
   return (
     <AuthProvider>
       <PostProvider>
-        <LikeProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/signup" element={<Register />} />
-              <Route path="/signin" element={<Login />} />
-              <Route path="/" element={<Feed />} />
-              <Route path="/:username" element={<Profile />} />
-              <Route path="/search" element={<h1>Ainda não implementada</h1>} />
-            </Routes>
-          </BrowserRouter>
-        </LikeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/signup" element={<Register />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/" element={<Feed />} />
+            <Route path="/:username" element={<Profile />} />
+            <Route path="/search" element={<SearchUsers />} />
+          </Routes>
+        </BrowserRouter>
       </PostProvider>
     </AuthProvider>
   )

@@ -76,6 +76,12 @@ function getFollowing(token, username){
     return promise;
 }
 
+function getUsers(filter){
+    const promise = axios.get(`${BASE_URL}/users?filter=${filter}`);
+    return promise;
+}
+
+
 const api = {
     signup,
     signin,
@@ -89,6 +95,7 @@ const api = {
     unfollow,
     getFollowers,
     getFollowing,
+    getUsers,
 }
 
 export default api;

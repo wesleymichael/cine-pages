@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { BoxFollowers, ButtonFollow } from "./styles";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 
 export default function FollowProfile({profile, loadPostsUsername}) {
     const [following, setFollowing] = useState(profile.isFollowing);
@@ -16,7 +17,7 @@ export default function FollowProfile({profile, loadPostsUsername}) {
                 await api.follow(auth.token, body);
             }
             setFollowing(!following);
-            loadPostsUsername();
+            loadPostsUsername(profile.username);
         } catch (error) {
             console.error("Erro ao seguir usuário:", error.response.data);
         }
@@ -24,10 +25,12 @@ export default function FollowProfile({profile, loadPostsUsername}) {
     
     return (
         <BoxFollowers>
-            <div>
-                <img src={profile.img} alt={profile.username} />
-                <p>{profile.username}</p>
-            </div>
+            <Link to={`/${profile.username}`} onClick={() => loadPostsUsername(profile.username)}>
+                <div>
+                    <img src={profile.img} alt={profile.username} />
+                    <p>{profile.username}</p>
+                </div>
+            </Link>
             <div>
                 {auth.user.username !== profile.username && (
                     following ? (
@@ -35,8 +38,7 @@ export default function FollowProfile({profile, loadPostsUsername}) {
                     ) : (
                         <ButtonFollow onClick={handleFollow}>Seguir</ButtonFollow>
                     )
-                )
-                }
+                )}
             </div>
         </BoxFollowers>
     )

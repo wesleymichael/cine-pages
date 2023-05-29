@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import useAuth from "../../hooks/useAuth";
 import api from "../../services/api";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Description, FooterPost, HeaderPost, ImgUser, LikeContainer, LikeIcon, Main, NoLikeIcon, Post } from "./styles";
 
 export default function PostFeed({ postData, loadPosts }) {
     const [liked, setLiked] = useState(postData.post.liked);
@@ -51,86 +50,3 @@ export default function PostFeed({ postData, loadPosts }) {
         </Post>
     )
 }
-
-const Post = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-    border: 1px solid #ddd;
-    margin-top: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    a{
-        color: #000;
-    }
-`;
-
-const HeaderPost = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #f5f5f5;
-    span{
-        font-weight: bold;
-    }
-`;
-
-const FooterPost = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    background-color: #fff;
-`;
-
-const ImgUser = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-`;
-
-const Main = styled.div`
-    height: 0;
-    padding-bottom: 75%;
-    position: relative;
-
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-`;
-
-const LikeContainer = styled.button`
-    border: none;
-    background: none;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    svg{
-        margin-right: 14px;
-        font-size: 16px;
-    }
-`;
-
-const LikeIcon = styled(AiFillHeart)`
-    color: red;
-`;
-
-const NoLikeIcon = styled(AiOutlineHeart)`
-    color: black;
-`;
-
-const Description = styled.p`
-    margin-bottom: 14px;
-    span{
-        padding-right: 7px;
-        font-weight: bold;
-    }
-`;

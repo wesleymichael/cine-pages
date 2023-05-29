@@ -1,4 +1,4 @@
-import Sidebar from "../Feed/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
@@ -16,7 +16,7 @@ export default function Profile() {
     const [showFollowing, setShowFollowing] = useState(false);
     const { auth } = useAuth();
 
-    function loadPostsUsername() {
+    function loadPostsUsername(username) {
         const promise = api.getPostsByUsername(auth.token, username);
         promise.then((res) => {
             setUsernameData(res.data[0]);
@@ -39,7 +39,7 @@ export default function Profile() {
         }
     };
 
-    useEffect(loadPostsUsername, []);
+    useEffect(() => loadPostsUsername(username), []);
 
     return (
         <>
@@ -58,8 +58,8 @@ export default function Profile() {
                         </div>
                         <Info>
                             <div>
-                                <span>{username}</span>
-                                {auth.user.username !== username && (
+                                <span>{usernameData.username}</span>
+                                {auth.user.username !== usernameData.username && (
                                     following ? (
                                         <ButtonFollow onClick={handleFollow}>Seguindo</ButtonFollow>
                                     ) : (

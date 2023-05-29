@@ -4,8 +4,8 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 
 export const ContainerFollow = styled.div`
     height: 60vh;
-    width: 20vw;
-    min-width: 300px;
+    width: 30vw;
+    min-width: 400px;
     margin: 0 auto; 
     position: fixed;
     top: 50%;
@@ -34,6 +34,9 @@ export const BoxFollowers = styled.div`
     justify-content: space-between;
     color: white;
     font-size: 18px;
+    a{
+        color: white;
+    }
     div{
         display: flex;
         align-items: center;
@@ -178,7 +181,7 @@ export const ProfileContainer = styled.div`
     img{
         width: 90px;
         height: 90px;
-        border-radius: 45px;
+        border-radius: 90px;
         object-fit: cover;
         margin: 0 70px;
     }
