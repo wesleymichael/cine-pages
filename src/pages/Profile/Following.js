@@ -4,7 +4,7 @@ import api from "../../services/api";
 import {ContainerBG, ContainerFollow } from "./styles";
 import FollowProfile from "./FollowProfile";
 
-export default function Following({ username, setShowFollowing, loadPostsUsername }) {
+export default function Following({ username, setShowFollowing }) {
     const { auth } = useAuth();
     const [followers, setFollowers] = useState([]);
 
@@ -26,7 +26,7 @@ export default function Following({ username, setShowFollowing, loadPostsUsernam
 
                 {followers && (
                     followers.map(profile => (
-                        <FollowProfile profile={profile} loadPostsUsername={loadPostsUsername} key={profile.id}/>
+                        <FollowProfile profile={profile} key={profile.id}/>
                     ))
                 )}
 

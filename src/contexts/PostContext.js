@@ -6,6 +6,8 @@ const PostContext = createContext();
 
 export function PostProvider({children}) {
     const [posts, setPosts] = useState([]);
+    const [usernameData, setUsernameData] = useState([]);
+    const [following, setFollowing] = useState(usernameData.isFollowing);
     const [activeAddPost, setActiveAddPost] = useState(false);
     const {auth} = useAuth();
 
@@ -17,8 +19,16 @@ export function PostProvider({children}) {
         });
     }
 
+    function loadPostsUsername(username) {
+        const promise = api.getPostsByUsername(auth.token, username);
+        promise.then((res) => {
+            setUsernameData(res.data[0]);
+            setFollowing(res.data[0].isFollowing);
+        })
+    }
+
     return (
-        <PostContext.Provider value={{loadPosts, activeAddPost, setActiveAddPost, posts}}>
+        <PostContext.Provider value={{loadPosts, activeAddPost, setActiveAddPost, posts, following, setFollowing, usernameData, setUsernameData, loadPostsUsername }}>
             {children}
         </PostContext.Provider>
     )

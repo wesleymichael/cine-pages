@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { Description, FooterPost, Image, LikeContainer, LikeIcon, Main, NoLikeIcon, Post } from "./styles";
+import usePost from "../../hooks/usePost";
 
-export default function PostRender({ post, loadPostsUsername }) {
+export default function PostRender({ post, username }) {
     const [liked, setLiked] = useState(post.liked);
+    const {loadPostsUsername} = usePost();
     const { auth } = useAuth();
-
-    useEffect(() => {
-        setLiked(post.liked);
-    }, [post.liked]);
 
     const handleLike = async () => {
         try {
-            console.log(post.liked, liked)
             if (liked) {
                 await api.dislikePost(auth.token, post.id);
             } else {
                 await api.likePost(auth.token, post.id);
             }
             setLiked(!liked);
-            loadPostsUsername();
+            loadPostsUsername(username);
         } catch (error) {
-            console.error("Erro ao curtir ou descurtir o post:", error);
+            console.error("Erro ao curtir ou descurtir o post:", error.response.data);
         }
     };
 

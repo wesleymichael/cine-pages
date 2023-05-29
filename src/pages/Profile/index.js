@@ -7,22 +7,16 @@ import PostRender from "./PostRender";
 import Followers from "./Followers";
 import { ButtonFollow, Container, ContainerPost, Info, ProfileContainer } from "./styles";
 import Following from "./Following";
+import usePost from "../../hooks/usePost";
 
 export default function Profile() {
     const { username } = useParams();
-    const [usernameData, setUsernameData] = useState([]);
-    const [following, setFollowing] = useState(usernameData.isFollowing);
+    //const [usernameData, setUsernameData] = useState([]);
+    //const [following, setFollowing] = useState(usernameData.isFollowing);
     const [showFollowers, setShowFollowers] = useState(false);
     const [showFollowing, setShowFollowing] = useState(false);
+    const {usernameData, following, setFollowing, loadPostsUsername} = usePost();
     const { auth } = useAuth();
-
-    function loadPostsUsername(username) {
-        const promise = api.getPostsByUsername(auth.token, username);
-        promise.then((res) => {
-            setUsernameData(res.data[0]);
-            setFollowing(res.data[0].isFollowing);
-        })
-    }
 
     const handleFollow = async () => {
         try {
@@ -33,9 +27,9 @@ export default function Profile() {
                 await api.follow(auth.token, body);
             }
             setFollowing(!following);
-            loadPostsUsername();
+            loadPostsUsername(username);
         } catch (error) {
-            console.error("Erro ao seguir usuário:", error.response.data);
+            console.log("Erro ao seguir usuário:", error.response.data);
         }
     };
 
@@ -44,10 +38,10 @@ export default function Profile() {
     return (
         <>
             {showFollowers && 
-                <Followers username={username} setShowFollowers={setShowFollowers} loadPostsUsername={loadPostsUsername}/>
+                <Followers username={username} setShowFollowers={setShowFollowers} />
             }
             {showFollowing && 
-                <Following username={username} setShowFollowing={setShowFollowing} loadPostsUsername={loadPostsUsername}/>
+                <Following username={username} setShowFollowing={setShowFollowing} />
             }
             <Sidebar />
             <Container>
@@ -78,7 +72,7 @@ export default function Profile() {
                 <ContainerPost>
                     {usernameData.postsUsername &&
                         usernameData.postsUsername.map(post => (
-                            <PostRender post={post} loadPostsUsername={loadPostsUsername} key={post.id} />
+                            <PostRender post={post} username={usernameData.username} key={post.id} />
                         ))
                     }
                 </ContainerPost>

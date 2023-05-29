@@ -3,9 +3,11 @@ import useAuth from "../../hooks/useAuth";
 import { BoxFollowers, ButtonFollow } from "./styles";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
+import usePost from "../../hooks/usePost";
 
-export default function FollowProfile({profile, loadPostsUsername}) {
+export default function FollowProfile({profile}) {
     const [following, setFollowing] = useState(profile.isFollowing);
+    const {loadPostsUsername} = usePost();
     const { auth } = useAuth();
 
     const handleFollow = async () => {

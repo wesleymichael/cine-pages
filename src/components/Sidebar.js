@@ -11,7 +11,7 @@ import { ContainerSideBar } from "./styled"
 export default function Sidebar() {
     const navigate = useNavigate();
     const {auth, logout} = useAuth();
-    const {activeAddPost, setActiveAddPost} = usePost();
+    const {activeAddPost, setActiveAddPost, loadPostsUsername} = usePost();
     
     function handleLogout(){
         const promise = api.logout(auth.token);
@@ -50,7 +50,7 @@ export default function Sidebar() {
             </div>
 
             <div>
-                <Link to={`/${auth.user.username}`}>
+                <Link to={`/${auth.user.username}`} onClick={() => loadPostsUsername(auth.user.username)}>
                     <img src={auth.user.img} alt={auth.user.username} />
                     <p>Perfil</p>
                 </Link>
