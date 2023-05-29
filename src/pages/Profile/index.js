@@ -63,8 +63,8 @@ export default function Profile() {
                             </div>
                             <div>
                                 <p>{usernameData.postsUsername?.length} publicações</p>
-                                <p onClick={() => setShowFollowers(true)}>{usernameData.followers} seguidores</p>
-                                <p onClick={() => setShowFollowing(true)}>{usernameData.following} seguindo</p>
+                                <span onClick={() => setShowFollowers(true)}>{usernameData.followers} seguidores</span>
+                                <span onClick={() => setShowFollowing(true)}>{usernameData.following} seguindo</span>
                             </div>
                         </Info>
                     </ProfileContainer>

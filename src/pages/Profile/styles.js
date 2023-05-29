@@ -171,6 +171,9 @@ export const Info = styled.div`
         justify-content: space-between;
         margin-bottom: 20px;
     }
+    span{
+        cursor: pointer;
+    }
 `
 
 export const ProfileContainer = styled.div`
