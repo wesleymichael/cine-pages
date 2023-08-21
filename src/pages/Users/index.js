@@ -24,12 +24,14 @@ export default function SearchUsers() {
         <>
             <Sidebar />
             <Container>
-                <InputContainer>
-                    <Input 
-                        placeholder="Pesquisar" 
-                        onChange={handleChange}
-                        value={filter}
-                    />
+                <ContainerUsers>
+                    <ContainerInput>
+                        <input 
+                            placeholder="Pesquisar" 
+                            onChange={handleChange}
+                            value={filter}
+                        />
+                    </ContainerInput>
                     <Users>
                         {users.map(user => (
                            <Link to={`/${user.username}`} key={user.id}>
@@ -40,7 +42,7 @@ export default function SearchUsers() {
                            </Link>
                         ))}
                     </Users>
-                </InputContainer>
+                </ContainerUsers>
             </Container>
         </>
     );
@@ -68,13 +70,16 @@ const Container = styled.div`
     
 `;
 
-const InputContainer = styled.div`
+const ContainerUsers = styled.div`
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 85%;
     margin: 50px auto;
     border: 1px solid ${COLOR_BORDER};
     border-radius: 4px;
+    overflow-y: auto;
+    position: relative;
+    
     @media (max-width: 1024px) {
 
     }
@@ -89,23 +94,27 @@ const InputContainer = styled.div`
     }
 `;
 
-const Input = styled.input`
-    width: 90%;
-    margin: 20px auto;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    background-color: #ccc;
-    border-radius: 4px;
-    outline: none;
-
+const ContainerInput = styled.div`
+    position: sticky;
+    top: 0;
+    background-color: white;
+    input {
+        width: 90%;
+        display: flex;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        background-color: #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
 `;
 
 const Users = styled.div`
     width: 90%;
-    margin-top: 20px;
     border-radius: 4px;
-    margin: 20px auto;
+    margin: 0 auto;
     div{
         display: flex;
         align-items: center;
@@ -117,6 +126,7 @@ const Users = styled.div`
             border-radius: 70px;
             object-fit: cover;
             margin-right: 10px;
+            border: 1px solid #ccc;
         }
     }
     @media (max-width: 1024px) {
