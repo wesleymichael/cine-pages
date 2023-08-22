@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { Button, Container, Form, Input, StyledLink } from "../../components/styled";
+import { toast } from "react-toastify";
 
 export function Register(){
     const [form, setForm] = useState({"email": "", "username": "", "password":"", "img": ""});
@@ -11,21 +12,18 @@ export function Register(){
     function handleChange(e){
         setForm({...form, [e.target.name]: e.target.value});
     }
-
-    function handleSubmit(e){
+    
+    async function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
-
-        const promise = api.signup({...form});
-
-        promise.then(() => {
+        try {
+            await api.signup({...form});
             setIsLoading(false);
             navigate("/signin");
-        });
-        promise.catch(() => {
+        } catch(error) {
             setIsLoading(false);
-            alert('Erro, tente novamente');
-        });
+            toast(`Erro ao criar usuário!`)
+        }
     }
 
     function validateEmail(email) {

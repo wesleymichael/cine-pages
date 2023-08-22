@@ -4,6 +4,7 @@ import { BoxFollowers, ButtonFollow } from "./styles";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
 import usePost from "../../hooks/usePost";
+import { toast } from "react-toastify";
 
 export default function FollowProfile({profile}) {
     const [following, setFollowing] = useState(profile.isFollowing);
@@ -21,7 +22,7 @@ export default function FollowProfile({profile}) {
             setFollowing(!following);
             loadPostsUsername(profile.username);
         } catch (error) {
-            console.error("Erro ao seguir usuário:", error.response.data);
+            toast("Erro ao seguir usuário:", error.response.data);
         }
     };
     

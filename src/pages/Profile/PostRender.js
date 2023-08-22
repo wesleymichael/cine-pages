@@ -3,6 +3,7 @@ import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { Description, FooterPost, Image, LikeContainer, LikeIcon, Main, NoLikeIcon, Post } from "./styles";
 import usePost from "../../hooks/usePost";
+import { toast } from "react-toastify";
 
 export default function PostRender({ post, username }) {
     const [liked, setLiked] = useState(post.liked);
@@ -19,7 +20,7 @@ export default function PostRender({ post, username }) {
             setLiked(!liked);
             loadPostsUsername(username);
         } catch (error) {
-            console.error("Erro ao curtir ou descurtir o post:", error.response.data);
+            toast("Erro ao curtir ou descurtir o post:", error.response.data);
         }
     };
 

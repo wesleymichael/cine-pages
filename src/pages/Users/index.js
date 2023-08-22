@@ -4,20 +4,20 @@ import { useState } from "react";
 import api from "../../services/api";
 import { COLOR_BORDER } from "../../constants/colors";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SearchUsers() {
     const [filter, setFilter] = useState("");
     const [users, setUsers] = useState([]);
 
-    function handleChange(e){
-        setFilter(e.target.value);
-        const promise = api.getUsers(e.target.value);
-        promise.then((res) =>{
+    async function handleChange(e){
+        try {
+            setFilter(e.target.value);
+            const res = await api.getUsers(e.target.value);
             setUsers(res.data);
-        });
-        promise.catch((error) =>{
-            console.log(error);
-        });
+        } catch {
+            toast("Ocorreu um erro!");
+        }
     }
 
     return (

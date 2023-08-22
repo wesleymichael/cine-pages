@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Description, FooterPost, HeaderPost, ImgUser, LikeContainer, LikeIcon, Main, NoLikeIcon, Post } from "./styles";
+import { toast } from "react-toastify";
 
 export default function PostFeed({ postData, loadPosts }) {
     const [liked, setLiked] = useState(postData.post.liked);
@@ -22,7 +23,7 @@ export default function PostFeed({ postData, loadPosts }) {
             setLiked(!liked);
             loadPosts();
         } catch (error) {
-            console.error("Erro ao curtir ou descurtir o post:", error);
+            toast("Erro ao curtir ou descurtir o post:", error);
         }
     };
 

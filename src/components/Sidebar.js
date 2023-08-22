@@ -7,21 +7,21 @@ import useAuth from "../hooks/useAuth"
 import NewPost from "../pages/Feed/NewPost";
 import usePost from "../hooks/usePost"
 import { ContainerSideBar } from "./styled"
+import { toast } from "react-toastify"
 
 export default function Sidebar() {
     const navigate = useNavigate();
     const {auth, logout} = useAuth();
     const {activeAddPost, setActiveAddPost, loadPostsUsername} = usePost();
     
-    function handleLogout(){
-        const promise = api.logout(auth.token);
-        promise.then(() => {
+    async function handleLogout(){
+        try {
+            await api.logout(auth.token);
             logout();
             navigate("/signin");
-        });
-        promise.catch(() => {
-            alert('Erro ao fazer logout, tente novamente');
-        });
+        } catch {
+            toast("Erro ao fazer logout, tente novamente");
+        }
     }
     return (
         <>

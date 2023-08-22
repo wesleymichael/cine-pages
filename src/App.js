@@ -6,10 +6,13 @@ import Feed from "./pages/Feed";
 import { PostProvider } from "./contexts/PostContext";
 import Profile from "./pages/Profile";
 import SearchUsers from "./pages/Users";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
-    <AuthProvider>
+    <>
+      <ToastContainer />
+      <AuthProvider>
       <PostProvider>
         <BrowserRouter>
           <Routes>
@@ -22,5 +25,6 @@ export default function App() {
         </BrowserRouter>
       </PostProvider>
     </AuthProvider>
+    </>
   )
 }

@@ -5,6 +5,7 @@ import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import usePost from "../../hooks/usePost";
 import { AddPostContainer, FormContainer } from "./styles";
+import { toast } from "react-toastify";
 
 export default function NewPost() {
     const [form, setForm] = useState({ "description": "", "img": "" });
@@ -16,20 +17,19 @@ export default function NewPost() {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
 
-        const promise = api.addPost(auth.token, { ...form });
-        promise.then((res) => {
+        try {
+            await api.addPost(auth.token, { ...form });
             setIsLoading(false);
             setActiveAddPost(false);
             loadPosts();
-        });
-        promise.catch(() => {
+        } catch {
             setIsLoading(false);
-            alert('Erro, tente novamente');
-        });
+            toast('Erro, tente novamente');
+        }
     }
 
     return (

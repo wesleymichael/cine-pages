@@ -8,6 +8,7 @@ import Followers from "./Followers";
 import { ButtonFollow, Container, ContainerPost, Info, ProfileContainer } from "./styles";
 import Following from "./Following";
 import usePost from "../../hooks/usePost";
+import { toast } from "react-toastify";
 
 export default function Profile() {
     const { username } = useParams();
@@ -27,7 +28,7 @@ export default function Profile() {
             setFollowing(!following);
             loadPostsUsername(username);
         } catch (error) {
-            console.log("Erro ao seguir usuário:", error.response.data);
+            toast("Erro ao seguir usuário:", error.response.data);
         }
     };
 
